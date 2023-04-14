@@ -8,6 +8,7 @@ Minor bug fixes and some additonal features.
     - SAVE_PROMPT = True : save all prompts of dewnloaded files into a csv file 
     - SAVE_JSON = True   : for each file, save associated json data into file
     - RANDOM_WAIT = True : random wait time, between (0.5, 2) seconds
+- added USER_ID as top level directory under 'jobs' dir
 
 
 -------
