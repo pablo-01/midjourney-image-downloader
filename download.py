@@ -23,6 +23,7 @@ GROUP_BY_MONTH = False
 SKIP_LOW_RATED = True
 SAVE_PROMPT = True
 SAVE_JSON = True
+RANDOM_WAIT = True
 # ---------------------------------
 
 UA = 'Midjourney-image-downloader/0.0.1'
@@ -119,6 +120,8 @@ def save_prompt(image_json):
 
         if SAVE_JSON:
             save_json(image_json, image_path)
+        if RANDOM_WAIT:
+            time.sleep(random.uniform(0.5, 2))
     return full_path
 
 
