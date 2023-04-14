@@ -1,4 +1,11 @@
-# midjourney-image-downloader
+# midjourney-image-downloader - fork
+
+Fork for my personal use / experiments.
+
+Minor bug fixes and some additonal features.
+
+
+-------
 Download your Midjourney gallery.
 
 Copied from https://github.com/timmc/midjourney-history-sync ⭐ and adapted with additional advice from [timmc](https://github.com/timmc) ️
