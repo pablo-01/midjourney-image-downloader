@@ -86,10 +86,6 @@ def save_prompt(image_json):
     month = enqueue_time.month
     day = enqueue_time.day
 
-    if(SAVE_PROMPT and prompt):
-        add_prompt_to_csv(prompt)
-
-
     filename = prompt.replace(" ", "_").replace(",", "").replace("*", "").replace("'", "").replace(":", "").replace(
         "__", "_").replace("<", "").replace(">", "").replace("/", "").replace(".", "").replace('"', '').replace(
         '|','').lower().strip("_*")[:100]
@@ -104,6 +100,8 @@ def save_prompt(image_json):
         # print(f"Skipping downloaded image {filename}")
         return
     else:
+        if(SAVE_PROMPT and prompt):
+            add_prompt_to_csv(prompt)
         image_path = ensure_path_exists(year, month, day, image_id)
         full_path = f"{image_path}/{filename}.png"
         for idx, image_url in enumerate(image_paths):
