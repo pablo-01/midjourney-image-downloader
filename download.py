@@ -2,6 +2,10 @@ import os
 import requests
 import urllib.request
 from datetime import datetime
+import json
+import time
+import random
+import csv
 
 # -------- CONFIG ------------------
 # Get your user ID from the "view as visitor link (https://www.midjourney.com/app/users/.../) on your Midjourney gallery
@@ -17,6 +21,8 @@ GRIDS_ONLY = False
 USE_DATE_FOLDERS = True
 GROUP_BY_MONTH = False
 SKIP_LOW_RATED = True
+SAVE_PROMPT = True
+SAVE_JSON = True
 # ---------------------------------
 
 UA = 'Midjourney-image-downloader/0.0.1'
@@ -79,6 +85,10 @@ def save_prompt(image_json):
     month = enqueue_time.month
     day = enqueue_time.day
 
+    if(SAVE_PROMPT and prompt):
+        add_prompt_to_csv(prompt)
+
+
     filename = prompt.replace(" ", "_").replace(",", "").replace("*", "").replace("'", "").replace(":", "").replace(
         "__", "_").replace("<", "").replace(">", "").replace("/", "").replace(".", "").lower().strip("_*")[:100]
 
@@ -101,10 +111,14 @@ def save_prompt(image_json):
             opener = urllib.request.build_opener()
             opener.addheaders = [('User-agent', UA)]
             urllib.request.install_opener(opener)
+            full_path = full_path.replace('"', '')
             urllib.request.urlretrieve(image_url, full_path)
         completed_file_path = f"{image_path}/done"
         f = open(completed_file_path, "x")
         f.close()
+
+        if SAVE_JSON:
+            save_json(image_json, image_path)
     return full_path
 
 
@@ -125,6 +139,17 @@ def paginated_download(order_by="new"):
 def download_all_order_by_types():
     for order_by_type in ORDER_BY_OPTIONS:
         paginated_download(order_by_type)
+
+
+def add_prompt_to_csv(prompt):
+    with open('prompts.csv', 'a', newline='', encoding='utf-8') as file:
+        writer = csv.writer(file)
+        writer.writerow([prompt])
+
+def save_json(image_path, image_json):
+    json_file_path = f"{image_path}/image.json"
+    with open(json_file_path, 'w') as outfile:
+        json.dump(image_json, outfile)
 
 
 def main():
