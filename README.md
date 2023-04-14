@@ -5,8 +5,9 @@ Fork for my personal use / experiments.
 Minor bug fixes and some additonal features.
 - bug fix: if prompt conatins quotemarks it will throw: removed quotemarks before file is saved
 - added flags to: 
-    - save json data for each file
-    - save each prompt in csv file
+    - SAVE_PROMPT = True : save all prompts of dewnloaded files into a csv file 
+    - SAVE_JSON = True   : for each file, save associated json data into file
+    - RANDOM_WAIT = True : random wait time, between (0.5, 2) seconds
 
 
 -------
