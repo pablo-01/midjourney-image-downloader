@@ -56,24 +56,24 @@ def download_page(page):
 
 def ensure_path_exists(year, month, day, image_id):
     if USE_DATE_FOLDERS:
-        if not os.path.isdir(f"jobs/{year}"):
-            os.makedirs(f"jobs/{year}")
-        if not os.path.isdir(f"jobs/{year}/{month}"):
-            os.makedirs(f"jobs/{year}/{month}")
+        if not os.path.isdir(f"jobs/{USER_ID}/{year}"):
+            os.makedirs(f"jobs/{USER_ID}/{year}")
+        if not os.path.isdir(f"jobs/{USER_ID}/{year}/{month}"):
+            os.makedirs(f"jobs/{USER_ID}/{year}/{month}")
         if GROUP_BY_MONTH:
-            if not os.path.isdir(f"jobs/{year}/{month}/{image_id}"):
-                os.makedirs(f"jobs/{year}/{month}/{image_id}")
-            return f"jobs/{year}/{month}/{image_id}"
+            if not os.path.isdir(f"jobs/{USER_ID}/{year}/{month}/{image_id}"):
+                os.makedirs(f"jobs/{USER_ID}/{year}/{month}/{image_id}")
+            return f"jobs/{USER_ID}/{year}/{month}/{image_id}"
         else:
-            if not os.path.isdir(f"jobs/{year}/{month}/{day}"):
-                os.makedirs(f"jobs/{year}/{month}/{day}")
+            if not os.path.isdir(f"jobs/{USER_ID}/{year}/{month}/{day}"):
+                os.makedirs(f"jobs/{USER_ID}/{year}/{month}/{day}")
             if not os.path.isdir(f"jobs/{year}/{month}/{day}/{image_id}"):
-                os.makedirs(f"jobs/{year}/{month}/{day}/{image_id}")
-            return f"jobs/{year}/{month}/{day}/{image_id}"
+                os.makedirs(f"jobs/{USER_ID}/{year}/{month}/{day}/{image_id}")
+            return f"jobs/{USER_ID}/{year}/{month}/{day}/{image_id}"
     else:
-        if not os.path.isdir(f"jobs/{image_id}"):
-            os.makedirs(f"jobs/{image_id}")
-        return f"jobs/{image_id}"
+        if not os.path.isdir(f"jobs/{USER_ID}/{image_id}"):
+            os.makedirs(f"jobs/{USER_ID}/{image_id}")
+        return f"jobs/{USER_ID}/{image_id}"
 
 
 def save_prompt(image_json):
@@ -94,9 +94,9 @@ def save_prompt(image_json):
     if SKIP_LOW_RATED and ranking_by_user and isinstance(ranking_by_user, int) and (ranking_by_user in [1, 2]):
         # print(f"Skipping low rated image {filename}")
         return
-    elif os.path.isfile(f"jobs/{year}/{month}/{image_id}/done") or \
-            os.path.isfile(f"jobs/{year}/{month}/{day}/{image_id}/done") or \
-            os.path.isfile(f"jobs/{image_id}/done"):
+    elif os.path.isfile(f"jobs/{USER_ID}/{year}/{month}/{image_id}/done") or \
+            os.path.isfile(f"jobs/{USER_ID}/{year}/{month}/{day}/{image_id}/done") or \
+            os.path.isfile(f"jobs/{USER_ID}/{image_id}/done"):
         # print(f"Skipping downloaded image {filename}")
         return
     else:
