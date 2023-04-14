@@ -3,6 +3,10 @@
 Fork for my personal use / experiments.
 
 Minor bug fixes and some additonal features.
+- bug fix: if prompt conatins quotemarks it will throw: removed quotemarks before file is saved
+- added flags to: 
+    - save json data for each file
+    - save each prompt in csv file
 
 
 -------
