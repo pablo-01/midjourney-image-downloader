@@ -88,7 +88,7 @@ def save_prompt(image_json):
 
     filename = prompt.replace(" ", "_").replace(",", "").replace("*", "").replace("'", "").replace(":", "").replace(
         "__", "_").replace("<", "").replace(">", "").replace("/", "").replace(".", "").replace('"', '').replace(
-        '|','').lower().strip("_*")[:100]
+        '|','').lower().strip("_*")[:100] if prompt != None else image_id
 
     ranking_by_user = image_json.get("ranking_by_user")
     if SKIP_LOW_RATED and ranking_by_user and isinstance(ranking_by_user, int) and (ranking_by_user in [1, 2]):
